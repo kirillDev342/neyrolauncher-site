@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoLauncher — стильный Minecraft лаунчер</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            transition: background-color 0.4s ease, color 0.3s ease;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Светлая тема (по умолчанию) */
+        body.light-theme {
+            background-color: #f5f9ff;
+            color: #0b1a2e;
+        }
+
+        body.light-theme .header {
+            background-color: #ffffffdd;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        body.light-theme .nav-menu a {
+            color: #334155;
+        }
+
+        body.light-theme .feature-card {
+            background: #ffffff;
+            border: 1px solid #e9eff8;
+            box-shadow: 0 8px 24px -12px #1e293b40;
+        }
+
+        body.light-theme .os-card {
+            background: white;
+            border: 1px solid #e9eff8;
+            box-shadow: 0 16px 32px -16px #1e293b50;
+        }
+
+        body.light-theme .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+        
+        body.light-theme .testimonial-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 28px -14px #2563eb30;
+        }
+        
+        body.light-theme .about {
+            background: #ffffff;
+        }
+
+        /* Темная тема */
+        body.dark-theme {
+            background-color: #0c111c;
+            color: #e2e8ff;
+        }
+
+        body.dark-theme .header {
+            background-color: #151e2cdd;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #2d374d;
+        }
+
+        body.dark-theme .nav-menu a {
+            color: #b7c3da;
+        }
+
+        body.dark-theme .nav-menu a:hover {
+            color: #7a9eff;
+        }
+
+        body.dark-theme .logo {
+            background: linear-gradient(135deg, #7a9eff, #b085ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        body.dark-theme .hero {
+            background: linear-gradient(180deg, #1a253b 0%, #0c111c 100%);
+        }
+
+        body.dark-theme .hero-content h1 {
+            color: #f0f4ff;
+        }
+
+        body.dark-theme .hero-sub {
+            color: #b0bedb;
+        }
+
+        body.dark-theme .feature-card {
+            background: #1f293d;
+            border: 1px solid #314159;
+            box-shadow: 0 12px 24px -16px #00000080;
+        }
+
+        body.dark-theme .feature-card p {
+            color: #c0caea;
+        }
+
+        body.dark-theme .os-card {
+            background: #1f293d;
+            border: 1px solid #314159;
+        }
+
+        body.dark-theme .os-size {
+            background: #2d3f60;
+            color: #cedcff;
+        }
+
+        body.dark-theme .footer {
+            background: #070e17;
+            color: #99a7c5;
+        }
+
+        body.dark-theme .btn-primary {
+            background: #3f6ef0;
+            box-shadow: 0 12px 24px -8px #1e40af80;
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background: #2b55c4;
+        }
+
+        body.dark-theme .btn-os {
+            border-color: #7a9eff;
+            color: #c8d6ff;
+        }
+
+        body.dark-theme .btn-os:hover {
+            background: #3f6ef0;
+            color: white;
+        }
+        
+        body.dark-theme .testimonial-card {
+            background: #1f293d;
+            border: 1px solid #314159;
+        }
+        
+        body.dark-theme .about {
+            background: #111a28;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Типографика */
+        h1, h2, h3, .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+        }
+
+        /* Хедер */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 16px 0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white !important;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s !important;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #4338ca);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px #2563eb;
+            color: white !important;
+        }
+
+        /* Переключатель темы */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* Бургер меню (мобильное) */
+        .burger-checkbox {
+            display: none;
+        }
+
+        .burger-icon {
+            display: none;
+            font-size: 2rem;
+            color: #2563eb;
+            cursor: pointer;
+        }
+
+        /* Hero секция */
+        .hero {
+            padding: 80px 0 100px;
+            transition: background 0.3s;
+        }
+
+        body.light-theme .hero {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f5fe 100%);
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(145deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            max-width: 540px;
+            margin-bottom: 40px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #2563eb, #4f46e5);
+            color: white;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 24px -8px #2563eb80;
+            transition: all 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(145deg, #1d4ed8, #4338ca);
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 24px 32px -10px #2563eb;
+        }
+
+        .platform-icons {
+            display: flex;
+            gap: 18px;
+            font-size: 2rem;
+            opacity: 0.9;
+            color: #475569;
+        }
+
+        body.dark-theme .platform-icons {
+            color: #b7c3da;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mockui {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 30px 20px;
+            box-shadow: 0 40px 60px -20px #2563eb80;
+            display: inline-block;
+            border: 1px solid rgba(37,99,235,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .mockui i {
+            font-size: 8rem;
+            color: #2563eb;
+            filter: drop-shadow(0 10px 12px #2563eb60);
+        }
+
+        /* Секция о нас */
+        .about {
+            padding: 100px 0;
+            transition: background 0.3s;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(145deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        /* Секция возможностей */
+        .features {
+            padding: 100px 0;
+            transition: background 0.3s;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            border-radius: 40px;
+            padding: 40px 30px;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: #2563eb;
+            box-shadow: 0 30px 40px -16px #2563eb;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            background: linear-gradient(145deg, #2563eb15, #6d28d915);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            color: #2563eb;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: linear-gradient(145deg, #2563eb25, #6d28d925);
+            transform: scale(1.05);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Секция отзывов (новая) */
+        .testimonials {
+            padding: 80px 0;
+            transition: background 0.3s;
+        }
+        
+        body.light-theme .testimonials {
+            background: #f0f5fe;
+        }
+        
+        body.dark-theme .testimonials {
+            background: #0f1825;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            border-radius: 32px;
+            padding: 32px;
+            transition: 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            border-color: #2563eb;
+            box-shadow: 0 20px 30px -12px #2563eb;
+        }
+        
+        .testimonial-rating {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #2563eb, #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Секция скачивания */
+        .download {
+            padding: 80px 0 120px;
+            transition: background 0.3s;
+        }
+
+        body.light-theme .download {
+            background: linear-gradient(0deg, #e8f0fe, #ffffff);
+        }
+
+        body.dark-theme .download {
+            background: linear-gradient(0deg, #0c1320, #121b2c);
+        }
+
+        .os-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .os-card {
+            border-radius: 48px;
+            padding: 48px 32px;
+            width: 300px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .os-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .os-card:hover::before {
+            left: 100%;
+        }
+
+        .os-card.recommended {
+            border: 2px solid #2563eb;
+            box-shadow: 0 30px 40px -16px #2563eb;
+            transform: scale(1.02);
+        }
+
+        .os-card:hover {
+            transform: translateY(-12px);
+            border-color: #2563eb;
+            box-shadow: 0 40px 50px -20px #2563eb;
+        }
+
+        .os-icon {
+            font-size: 4.5rem;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .os-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .os-size {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 40px;
+            margin-bottom: 30px;
+        }
+
+        .btn-os {
+            background: transparent;
+            border: 2px solid #2563eb;
+            border-radius: 60px;
+            padding: 14px 24px;
+            width: 100%;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        /* Футер */
+        .footer {
+            padding: 48px 0 32px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer .socials {
+            display: flex;
+            gap: 30px;
+        }
+
+        .socials a {
+            font-size: 2rem;
+            transition: 0.2s;
+        }
+
+        body.light-theme .socials a {
+            color: #94a3b8;
+        }
+
+        body.dark-theme .socials a {
+            color: #7f8fb0;
+        }
+
+        .socials a:hover {
+            color: #2563eb;
+            transform: translateY(-4px);
+        }
+
+        /* Canvas для снега */
+        #snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+        }
+
+        /* НОВЫЕ СЕКЦИИ */
+
+        /* FAQ секция */
+        .faq {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        details {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Форма обратной связи */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(145deg, #2563eb, #4f46e5);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px #2563eb;
+        }
+
+        /* Счетчик скачиваний */
+        .download-stats {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--bg-primary);
+            border-radius: 60px;
+            display: inline-block;
+        }
+
+        .download-count {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(145deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Адаптивность */
+        @media screen and (max-width: 968px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+            .hero-sub {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .burger-icon {
+                display: block;
+            }
+
+            .header .container {
+                flex-wrap: wrap;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                padding: 32px 0;
+                gap: 1.8rem;
+                border-bottom: 2px solid #2563eb40;
+                transform: translateY(-150%);
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.3s;
+                box-shadow: 0 20px 30px -10px #00000030;
+                z-index: 40;
+            }
+
+            body.light-theme .nav-menu {
+                background: white;
+            }
+
+            body.dark-theme .nav-menu {
+                background: #1e2a3a;
+            }
+
+            #burger-toggle:checked ~ .nav-menu {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .os-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .os-card {
+                width: 100%;
+                max-width: 360px;
+            }
+            .about-stats {
+                gap: 30px;
+            }
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <canvas id="snow-canvas"></canvas>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">NeoLauncher</div>
+
+            <input type="checkbox" id="burger-toggle" class="burger-checkbox" hidden>
+            <label for="burger-toggle" class="burger-icon"><i class="fas fa-bars"></i></label>
+
+            <nav class="nav-menu">
+                <a href="#home">Главная</a>
+                <a href="#about">О нас</a>
+                <a href="#features">Возможности</a>
+                <a href="#testimonials">Отзывы</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Контакты</a>
+                <a href="#download" class="nav-btn">Скачать</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero секция -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>
+                        <span class="hero-highlight">NeoLauncher</span><br>
+                        для Minecraft
+                    </h1>
+                    <p class="hero-sub">Быстрый, стильный и удобный лаунчер с чистым интерфейсом и передовыми технологиями.</p>
+                    <div class="hero-actions">
+                        <a href="#download" class="btn-primary">
+                            Скачать <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <div class="platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-apple"></i>
+                            <i class="fab fa-linux"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="mockui">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">О проекте NeoLauncher</h2>
+                <div class="about-content">
+                    <p>Мы — команда энтузиастов, объединенных любовью к Minecraft и желанием сделать игру еще комфортнее. NeoLauncher родился из идеи создать лаунчер, который будет не просто инструментом, а настоящим спутником в мире кубических приключений.</p>
+                    <p>Мы ценим ваше время и поэтому сделали упор на скорость, стабильность и красивый минималистичный интерфейс. Каждая деталь продумана, чтобы вы забыли о технических сложностях и просто наслаждались игрой.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Скачиваний</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">Рейтинг</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Поддержка</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Возможности -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Создан для комфортной игры</h2>
+                <p class="section-subtitle">Продуманный функционал без лишнего шума</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Мгновенный старт</h3>
+                        <p>Запускай игру за секунды благодаря интеллектуальному кэшированию.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-code-branch"></i></div>
+                        <h3>Версии под контролем</h3>
+                        <p>Любая версия Minecraft — от классики до снапшотов — в пару кликов.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <h3>Моды и сборки</h3>
+                        <p>Умный менеджер модов с автоматической установкой зависимостей.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h3>Максимальный FPS</h3>
+                        <p>Встроенные оптимизации и настройки для слабых и мощных ПК.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Кастомизация скинов</h3>
+                        <p>Меняй скины на лету, загружай свои или выбирай из библиотеки.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
+                        <h3>Гибкие настройки</h3>
+                        <p>Тонкая настройка Java-аргументов, разрешений и управления.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Что говорят игроки</h2>
+                <p class="section-subtitle">Более 50 000 пользователей доверяют нам</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Лучший лаунчер, которым я пользовался. Запускается моментально, интерфейс приятный и современный. Отдельное спасибо за удобное управление модами!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">D</div>
+                            <div class="author-info">
+                                <h4>Дмитрий Волков</h4>
+                                <p>Стример</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Перепробовал много лаунчеров, но NeoLauncher реально выделяется. Никаких тормозов, всё интуитивно понятно. И дизайн шикарный!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h4>Анна Смирнова</h4>
+                                <p>Билдер</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Наконец-то лаунчер, который не тормозит на старом ноутбуке. Оптимизация на высоте, FPS в игре вырос明显. Спасибо разработчикам!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>Михаил Петров</h4>
+                                <p>Технический энтузиаст</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ секция -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+                <p class="section-subtitle">Ответы на самые популярные вопросы</p>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <details>
+                            <summary>Как установить NeoLauncher?</summary>
+                            <div class="faq-answer">
+                                Просто скачай версию для своей операционной системы, запусти установщик и следуй инструкциям. Весь процесс занимает меньше минуты!
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="faq-item">
+                        <details>
+                            <summary>Какие версии Minecraft поддерживаются?</summary>
+                            <div class="faq-answer">
+                                Мы поддерживаем все версии от 1.7.10 до самых свежих снапшотов. Также есть возможность установки модов через Forge и Fabric.
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="faq-item">
+                        <details>
+                            <summary>Это безопасно?</summary>
+                            <div class="faq-answer">
+                                Да! Наш лаунчер с открытым исходным кодом, мы не собираем никаких личных данных. Все файлы проверяются антивирусами.
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="faq-item">
+                        <details>
+                            <summary>Как установить моды?</summary>
+                            <div class="faq-answer">
+                                В лаунчере есть встроенный менеджер модов. Просто выбери нужную версию Forge/Fabric и нажми "Установить моды".
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма обратной связи -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Свяжитесь с нами</h2>
+                <p class="section-subtitle">Есть вопросы? Напиши нам!</p>
+                
+                <div class="contact-form">
+                    <form id="contact-form" onsubmit="return sendMessage()">
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="name" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" id="email" placeholder="Ваш email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" id="message" placeholder="Ваше сообщение" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Скачать -->
+        <section id="download" class="download">
+            <div class="container">
+                <h2 class="section-title">Начни играть по-новому</h2>
+                <p class="section-subtitle">Выбери свою платформу</p>
+                
+                <div class="download-stats">
+                    <span class="download-count" id="download-count">0</span> скачиваний
+                </div>
+                
+                <div class="os-grid">
+                    <div class="os-card recommended">
+                        <div class="os-icon"><i class="fab fa-windows"></i></div>
+                        <h3>Windows</h3>
+                        <div class="os-size">~6.2 MB</div>
+                        <a href="#" class="btn-os" onclick="incrementDownload('windows')">Скачать для Windows</a>
+                    </div>
+                    <div class="os-card">
+                        <div class="os-icon"><i class="fab fa-apple"></i></div>
+                        <h3>macOS</h3>
+                        <div class="os-size">~7.1 MB</div>
+                        <a href="#" class="btn-os" onclick="incrementDownload('mac')">Скачать для macOS</a>
+                    </div>
+                    <div class="os-card">
+                        <div class="os-icon"><i class="fab fa-linux"></i></div>
+                        <h3>Linux</h3>
+                        <div class="os-size">~5.8 MB</div>
+                        <a href="#" class="btn-os" onclick="incrementDownload('linux')">Скачать для Linux</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="socials">
+                <a href="#" aria-label="Discord" id="discord-link"><i class="fab fa-discord"></i></a>
+                <a href="#" aria-label="YouTube" id="youtube-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="GitHub" id="github-link"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2024 NeoLauncher. Неофициальный проект. Minecraft является товарным знаком Mojang Studios.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Плавный скролл и закрытие бургера
+            const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+            const burger = document.getElementById('burger-toggle');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === "#") return;
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    if (burger) burger.checked = false;
+                });
+            });
+
+            // Кнопка в hero
+            const heroBtn = document.querySelector('.btn-primary');
+            if (heroBtn) {
+                heroBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#download');
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // Переключение темы
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
+
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light-theme')) {
+                    body.classList.remove('light-theme');
+                    body.classList.add('dark-theme');
+                    icon.className = 'fas fa-sun';
+                } else {
+                    body.classList.remove('dark-theme');
+                    body.classList.add('light-theme');
+                    icon.className = 'fas fa-moon';
+                }
+            });
+
+            // Снегопад с улучшенной производительностью
+            const canvas = document.getElementById('snow-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            let animationFrame;
+
+            function initCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            function createParticles(count) {
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 3.5 + 0.8,
+                        speed: Math.random() * 1.2 + 0.2,
+                        opacity: Math.random() * 0.4 + 0.2,
+                        sway: Math.random() * 0.5
+                    });
+                }
+            }
+
+            function drawSnow() {
+                ctx.clearRect(0, 0, width, height);
+                
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'rgba(255,255,255,0.5)';
+                    ctx.fill();
+                    
+                    p.y += p.speed;
+                    p.x += Math.sin(Date.now() * 0.002 + p.y * 0.02) * 0.15;
+                    
+                    if (p.y > height + 10) {
+                        p.y = -10;
+                        p.x = Math.random() * width;
+                    }
+                });
+                
+                animationFrame = requestAnimationFrame(drawSnow);
+            }
+
+            window.addEventListener('resize', () => {
+                initCanvas();
+                createParticles(130);
+            });
+
+            initCanvas();
+            createParticles(130);
+            drawSnow();
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cancelAnimationFrame(animationFrame);
+                } else {
+                    drawSnow();
+                }
+            });
+
+            // Счетчик скачиваний
+            let downloads = localStorage.getItem('downloads') || 0;
+            document.getElementById('download-count').textContent = downloads;
+
+            window.incrementDownload = function(os) {
+                downloads++;
+                localStorage.setItem('downloads', downloads);
+                document.getElementById('download-count').textContent = downloads;
+                alert(`Скачивание ${os} версии началось! Спасибо!`);
+                return false;
+            }
+
+            // Форма обратной связи
+            window.sendMessage = function() {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                alert(`Спасибо, ${name}! Мы ответим вам на ${email} в ближайшее время.`);
+                document.getElementById('contact-form').reset();
+                return false;
+            }
+
+            // Ссылки на соцсети (замени на свои)
+            document.getElementById('discord-link').href = 'https://discord.gg/твой-сервер';
+            document.getElementById('youtube-link').href = 'https://youtube.com/c/твой-канал';
+            document.getElementById('github-link').href = 'https://github.com/kirillDev342/neyrolauncher-site';
+        })();
+    </script>
+</body>
+</html>

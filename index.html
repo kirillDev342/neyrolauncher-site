@@ -2,1715 +2,1492 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoLauncher — стильный Minecraft лаунчер</title>
-    <!-- Google Fonts & Font Awesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TANKI 2025 - МЕГА ВЕРСИЯ</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
-            transition: background-color 0.4s ease, color 0.3s ease;
-            position: relative;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 10px;
         }
 
-        /* Светлая тема (по умолчанию) */
-        body.light-theme {
-            background-color: #f5f9ff;
-            color: #0b1a2e;
-        }
-
-        body.light-theme .header {
-            background-color: #ffffffdd;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        body.light-theme .nav-menu a {
-            color: #334155;
-        }
-
-        body.light-theme .feature-card {
-            background: #ffffff;
-            border: 1px solid #e9eff8;
-            box-shadow: 0 8px 24px -12px #1e293b40;
-        }
-
-        body.light-theme .os-card {
-            background: white;
-            border: 1px solid #e9eff8;
-            box-shadow: 0 16px 32px -16px #1e293b50;
-        }
-
-        body.light-theme .footer {
-            background: #0f172a;
-            color: #cbd5e1;
-        }
-        
-        body.light-theme .testimonial-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 12px 28px -14px #2563eb30;
-        }
-        
-        body.light-theme .about {
-            background: #ffffff;
-        }
-
-        /* Темная тема */
-        body.dark-theme {
-            background-color: #0c111c;
-            color: #e2e8ff;
-        }
-
-        body.dark-theme .header {
-            background-color: #151e2cdd;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #2d374d;
-        }
-
-        body.dark-theme .nav-menu a {
-            color: #b7c3da;
-        }
-
-        body.dark-theme .nav-menu a:hover {
-            color: #7a9eff;
-        }
-
-        body.dark-theme .logo {
-            background: linear-gradient(135deg, #7a9eff, #b085ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
-        body.dark-theme .hero {
-            background: linear-gradient(180deg, #1a253b 0%, #0c111c 100%);
-        }
-
-        body.dark-theme .hero-content h1 {
-            color: #f0f4ff;
-        }
-
-        body.dark-theme .hero-sub {
-            color: #b0bedb;
-        }
-
-        body.dark-theme .feature-card {
-            background: #1f293d;
-            border: 1px solid #314159;
-            box-shadow: 0 12px 24px -16px #00000080;
-        }
-
-        body.dark-theme .feature-card p {
-            color: #c0caea;
-        }
-
-        body.dark-theme .os-card {
-            background: #1f293d;
-            border: 1px solid #314159;
-        }
-
-        body.dark-theme .os-size {
-            background: #2d3f60;
-            color: #cedcff;
-        }
-
-        body.dark-theme .footer {
-            background: #070e17;
-            color: #99a7c5;
-        }
-
-        body.dark-theme .btn-primary {
-            background: #3f6ef0;
-            box-shadow: 0 12px 24px -8px #1e40af80;
-        }
-
-        body.dark-theme .btn-primary:hover {
-            background: #2b55c4;
-        }
-
-        body.dark-theme .btn-os {
-            border-color: #7a9eff;
-            color: #c8d6ff;
-        }
-
-        body.dark-theme .btn-os:hover {
-            background: #3f6ef0;
-            color: white;
-        }
-        
-        body.dark-theme .testimonial-card {
-            background: #1f293d;
-            border: 1px solid #314159;
-        }
-        
-        body.dark-theme .about {
-            background: #111a28;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Типографика */
-        h1, h2, h3, .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #2563eb, #6d28d9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
+        #game-container {
+            position: relative;
             width: 100%;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            opacity: 0.8;
-        }
-
-        /* Хедер */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            padding: 16px 0;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #2563eb, #4f46e5);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-btn {
-            background: linear-gradient(135deg, #2563eb, #4f46e5);
-            color: white !important;
-            padding: 10px 28px;
+            max-width: 1400px;
+            height: 90vh;
+            background: #0f0f1f;
             border-radius: 40px;
-            font-weight: 600;
-            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
-            transition: all 0.2s !important;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 2px solid #4a9c4a;
         }
 
-        .nav-btn:hover {
-            background: linear-gradient(135deg, #1d4ed8, #4338ca);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px -8px #2563eb;
-            color: white !important;
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: linear-gradient(180deg, #1a3a5a 0%, #0f2a3a 100%);
         }
 
-        /* Кнопка профиля */
-        .profile-btn {
-            background: transparent;
-            border: 2px solid #2563eb;
-            color: #2563eb;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .profile-btn:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        .profile-btn i {
-            font-size: 1.2rem;
-        }
-
-        /* Модальное окно авторизации */
-        .auth-modal {
-            display: none;
-            position: fixed;
+        /* ========== МЕНЮ ========== */
+        #menu {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 30, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            align-items: center;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        .auth-modal.active {
-            display: flex;
+        .menu-container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(30, 30, 50, 0.9);
+            border: 3px solid #4a9c4a;
+            border-radius: 50px;
+            padding: 30px;
         }
 
-        .auth-card {
-            background: var(--bg-primary);
-            border-radius: 40px;
-            padding: 40px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            animation: modalSlide 0.3s;
-        }
-
-        @keyframes modalSlide {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .auth-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-
-        .auth-tabs {
-            display: flex;
-            gap: 10px;
+        .menu-header {
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .auth-tab {
-            flex: 1;
-            padding: 12px;
-            background: transparent;
-            border: 2px solid #2563eb;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-primary);
-        }
-
-        .auth-tab.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 30px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: border-color 0.3s;
-        }
-
-        .auth-input:focus {
-            border-color: #2563eb;
-            outline: none;
-        }
-
-        .auth-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(145deg, #2563eb, #4f46e5);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-
-        .auth-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px #2563eb;
-        }
-
-        .auth-message {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #ff4444;
-        }
-
-        .auth-success {
-            color: #4a9c4a;
-        }
-
-        /* Профиль пользователя */
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(145deg, #2563eb, #6d28d9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .logout-btn {
-            background: transparent;
-            border: 2px solid #ff4444;
-            color: #ff4444;
-            padding: 5px 15px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #ff4444;
-            color: white;
-        }
-
-        /* Переключатель темы */
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2563eb;
-            transition: transform 0.3s;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(15deg) scale(1.1);
-        }
-
-        /* Бургер меню (мобильное) */
-        .burger-checkbox {
-            display: none;
-        }
-
-        .burger-icon {
-            display: none;
-            font-size: 2rem;
-            color: #2563eb;
-            cursor: pointer;
-        }
-
-        /* Hero секция */
-        .hero {
-            padding: 80px 0 100px;
-            transition: background 0.3s;
-        }
-
-        body.light-theme .hero {
-            background: linear-gradient(180deg, #ffffff 0%, #f0f5fe 100%);
-        }
-
-        .hero .container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
-
-        .hero-highlight {
-            background: linear-gradient(145deg, #2563eb, #6d28d9);
+        .menu-title {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4a9c4a, #2ecc71);
             -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-sub {
-            font-size: 1.25rem;
-            max-width: 540px;
-            margin-bottom: 40px;
-        }
-
-        .hero-actions {
+        .menu-stats {
             display: flex;
-            gap: 24px;
-            align-items: center;
-            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            color: gold;
+            font-size: 18px;
         }
 
-        .btn-primary {
-            background: linear-gradient(145deg, #2563eb, #4f46e5);
-            color: white;
-            border: none;
-            padding: 16px 42px;
-            border-radius: 60px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 12px 24px -8px #2563eb80;
-            transition: all 0.25s;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(145deg, #1d4ed8, #4338ca);
-            transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 24px 32px -10px #2563eb;
-        }
-
-        .platform-icons {
+        .mode-tabs {
             display: flex;
-            gap: 18px;
-            font-size: 2rem;
-            opacity: 0.9;
-            color: #475569;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
 
-        body.dark-theme .platform-icons {
-            color: #b7c3da;
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-
-        .mockui {
+        .mode-tab {
+            padding: 15px 40px;
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 30px 20px;
-            box-shadow: 0 40px 60px -20px #2563eb80;
-            display: inline-block;
-            border: 1px solid rgba(37,99,235,0.3);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .mockui i {
-            font-size: 8rem;
-            color: #2563eb;
-            filter: drop-shadow(0 10px 12px #2563eb60);
-        }
-
-        /* Секция о нас */
-        .about {
-            padding: 100px 0;
-            transition: background 0.3s;
-        }
-
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.2rem;
-            line-height: 1.8;
-        }
-
-        .about-stats {
-            display: flex;
-            justify-content: center;
-            gap: 70px;
-            margin-top: 60px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
-            background: linear-gradient(145deg, #2563eb, #6d28d9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.7;
-        }
-
-        /* Секция возможностей */
-        .features {
-            padding: 100px 0;
-            transition: background 0.3s;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
+            border: 2px solid transparent;
             border-radius: 40px;
-            padding: 40px 30px;
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-12px);
-            border-color: #2563eb;
-            box-shadow: 0 30px 40px -16px #2563eb;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
-            background: linear-gradient(145deg, #2563eb15, #6d28d915);
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30px;
-            color: #2563eb;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: linear-gradient(145deg, #2563eb25, #6d28d925);
-            transform: scale(1.05);
-        }
-
-        .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-        }
-
-        .feature-card p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Секция отзывов */
-        .testimonials {
-            padding: 80px 0;
-            transition: background 0.3s;
-        }
-        
-        body.light-theme .testimonials {
-            background: #f0f5fe;
-        }
-        
-        body.dark-theme .testimonials {
-            background: #0f1825;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .testimonial-card {
-            border-radius: 32px;
-            padding: 32px;
-            transition: 0.3s;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-8px);
-            border-color: #2563eb;
-            box-shadow: 0 20px 30px -12px #2563eb;
-        }
-        
-        .testimonial-rating {
-            color: #fbbf24;
-            font-size: 1.2rem;
-            margin-bottom: 16px;
-        }
-        
-        .testimonial-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 24px;
-            opacity: 0.9;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .author-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #2563eb, #6d28d9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: white;
+            font-size: 18px;
             font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .author-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-        
-        .author-info p {
-            font-size: 0.9rem;
-            opacity: 0.6;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        /* FAQ секция */
-        .faq {
-            padding: 80px 0;
-            background: var(--bg-secondary);
+        .mode-tab:hover {
+            border-color: #4a9c4a;
         }
 
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
+        .mode-tab.active {
+            background: #4a9c4a;
         }
 
-        .faq-item {
-            margin-bottom: 20px;
+        /* КАРТЫ */
+        .maps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .map-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
             border-radius: 20px;
-            overflow: hidden;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
         }
 
-        details {
-            background: var(--bg-primary);
+        .map-card:hover {
+            border-color: #4a9c4a;
+            transform: translateY(-3px);
+        }
+
+        .map-card.selected {
+            border-color: #4a9c4a;
+            background: rgba(74,156,74,0.15);
+        }
+
+        .map-preview {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .map-name {
+            color: white;
+            font-size: 16px;
+        }
+
+        /* ТАНКИ */
+        .tanks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tank-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .tank-card:hover {
+            border-color: #4a9c4a;
+            transform: translateY(-3px);
+        }
+
+        .tank-card.selected {
+            border-color: #4a9c4a;
+            background: rgba(74,156,74,0.15);
+        }
+
+        .tank-icon {
+            font-size: 40px;
+        }
+
+        .tank-name {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .tank-level {
+            color: gold;
+            font-size: 12px;
+        }
+
+        /* КОМНАТЫ */
+        .rooms-panel {
+            background: rgba(0,0,0,0.3);
             border-radius: 20px;
             padding: 20px;
-            cursor: pointer;
+            margin: 20px 0;
         }
 
-        summary {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            list-style: none;
+        .room-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin: 10px 0;
         }
 
-        summary::after {
-            content: '▼';
-            font-size: 0.8rem;
-            transition: transform 0.3s;
+        .room-info {
+            display: flex;
+            gap: 20px;
+            color: white;
         }
 
-        details[open] summary::after {
-            transform: rotate(180deg);
+        .room-name {
+            color: #4a9c4a;
+            font-weight: 600;
         }
 
-        .faq-answer {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
+        .join-btn {
+            background: #4a9c4a;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 15px;
+            cursor: pointer;
         }
 
-        /* Форма обратной связи */
-        .contact {
-            padding: 80px 0;
+        .create-room {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-primary);
+        .room-input {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #4a9c4a;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .create-btn {
+            background: #4a9c4a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* КОМНАТА ОЖИДАНИЯ */
+        #waiting-room {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            border: 3px solid #4a9c4a;
+            border-radius: 40px;
             padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+            z-index: 500;
+            text-align: center;
+            min-width: 400px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .room-code {
+            font-size: 48px;
+            color: #4a9c4a;
+            letter-spacing: 10px;
+            margin: 20px 0;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 15px 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: border-color 0.3s;
+        .players-list {
+            margin: 20px 0;
         }
 
-        .form-input:focus {
-            border-color: #2563eb;
-            outline: none;
+        .player-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 5px 0;
+            color: white;
         }
 
-        .form-textarea {
-            width: 100%;
-            padding: 15px 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            min-height: 120px;
-            resize: vertical;
+        .player-ready {
+            margin-left: auto;
+            color: #4a9c4a;
         }
 
-        .form-textarea:focus {
-            border-color: #2563eb;
-            outline: none;
-        }
-
-        .submit-btn {
-            background: linear-gradient(145deg, #2563eb, #4f46e5);
+        .ready-btn {
+            background: #4a9c4a;
             color: white;
             border: none;
             padding: 15px 40px;
             border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px #2563eb;
-        }
-
-        /* Секция скачивания */
-        .download {
-            padding: 80px 0 120px;
-            transition: background 0.3s;
-        }
-
-        body.light-theme .download {
-            background: linear-gradient(0deg, #e8f0fe, #ffffff);
-        }
-
-        body.dark-theme .download {
-            background: linear-gradient(0deg, #0c1320, #121b2c);
-        }
-
-        .os-grid {
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 100;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
+            gap: 15px;
         }
 
-        .os-card {
-            border-radius: 48px;
-            padding: 48px 32px;
-            width: 300px;
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
+        .hud-panel {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4a9c4a;
+            border-radius: 20px;
+            padding: 15px 25px;
+            color: white;
+        }
+
+        .health-bar {
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ffaa00);
+            width: 100%;
+            transition: width 0.3s;
+        }
+
+        .kills-counter {
+            color: gold;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* МИНИКАРТА */
+        #minimap {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #4a9c4a;
+            border-radius: 20px;
+            z-index: 100;
             overflow: hidden;
         }
-        
-        .os-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+
+        #minimap canvas {
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
-            transition: 0.5s;
-        }
-        
-        .os-card:hover::before {
-            left: 100%;
         }
 
-        .os-card.recommended {
-            border: 2px solid #2563eb;
-            box-shadow: 0 30px 40px -16px #2563eb;
-            transform: scale(1.02);
+        /* ЧАТ */
+        #chat {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 300px;
+            height: 200px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4a9c4a;
+            border-radius: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
         }
 
-        .os-card:hover {
-            transform: translateY(-12px);
-            border-color: #2563eb;
-            box-shadow: 0 40px 50px -20px #2563eb;
+        #chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            color: white;
+            font-size: 12px;
         }
 
-        .os-icon {
-            font-size: 4.5rem;
-            color: #2563eb;
+        #chat-input {
+            display: flex;
+            padding: 5px;
+        }
+
+        #chat-input input {
+            flex: 1;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #4a9c4a;
+            border-radius: 15px;
+            color: white;
+        }
+
+        #chat-input button {
+            background: #4a9c4a;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 15px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        /* УПРАВЛЕНИЕ */
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4a9c4a;
+            border-radius: 20px;
+            padding: 15px;
+            color: white;
+            z-index: 100;
+        }
+
+        .control-item {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key {
+            background: #333;
+            border: 1px solid #4a9c4a;
+            border-radius: 5px;
+            padding: 3px 8px;
+            color: #4a9c4a;
+        }
+
+        /* ТАБЛО РЕЗУЛЬТАТОВ */
+        #scoreboard {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            border: 3px solid gold;
+            border-radius: 40px;
+            padding: 40px;
+            z-index: 1000;
+            text-align: center;
+            min-width: 400px;
+        }
+
+        .scoreboard-title {
+            color: gold;
+            font-size: 32px;
             margin-bottom: 20px;
         }
 
-        .os-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+        .scoreboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            color: white;
+            font-size: 18px;
+            margin: 5px 0;
         }
 
-        .os-size {
-            font-weight: 600;
-            font-size: 1.2rem;
-            display: inline-block;
-            padding: 4px 18px;
+        /* МАГАЗИН */
+        #shop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            border: 3px solid gold;
             border-radius: 40px;
-            margin-bottom: 30px;
+            padding: 40px;
+            z-index: 1000;
+            min-width: 500px;
         }
 
-        .btn-os {
-            background: transparent;
-            border: 2px solid #2563eb;
-            border-radius: 60px;
-            padding: 14px 24px;
-            width: 100%;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.2s;
+        .shop-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            margin: 10px 0;
             cursor: pointer;
         }
 
-        /* Футер */
-        .footer {
-            padding: 48px 0 32px;
-            transition: background 0.3s, color 0.3s;
+        .shop-item:hover {
+            background: rgba(74,156,74,0.2);
         }
 
-        .footer .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
+        .shop-item-icon {
+            font-size: 40px;
         }
 
-        .footer .socials {
-            display: flex;
-            gap: 30px;
+        .shop-item-info {
+            flex: 1;
+            color: white;
         }
 
-        .socials a {
-            font-size: 2rem;
-            transition: 0.2s;
+        .shop-item-price {
+            color: gold;
+            font-weight: bold;
         }
 
-        body.light-theme .socials a {
-            color: #94a3b8;
+        /* БОНУСЫ НА КАРТЕ */
+        .bonus-info {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #4a9c4a;
+            border-radius: 15px;
+            padding: 10px;
+            color: white;
+            font-size: 12px;
+            z-index: 100;
         }
 
-        body.dark-theme .socials a {
-            color: #7f8fb0;
-        }
-
-        .socials a:hover {
-            color: #2563eb;
-            transform: translateY(-4px);
-        }
-
-        /* Canvas для снега */
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* УВЕДОМЛЕНИЯ */
+        #notification {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #4a9c4a;
+            border-radius: 40px;
+            padding: 20px 40px;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2000;
             pointer-events: none;
-            z-index: 9999;
-            opacity: 0.6;
         }
 
-        /* Счетчик скачиваний */
-        .download-stats {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--bg-primary);
-            border-radius: 60px;
-            display: inline-block;
-        }
-
-        .download-count {
-            font-size: 1.5rem;
-            font-weight: 600;
-            background: linear-gradient(145deg, #2563eb, #6d28d9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Адаптивность */
-        @media screen and (max-width: 968px) {
-            .hero .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-content h1 {
-                font-size: 3.2rem;
-            }
-            .hero-sub {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-actions {
-                justify-content: center;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .burger-icon {
-                display: block;
-            }
-
-            .header .container {
-                flex-wrap: wrap;
-            }
-
-            .nav-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                padding: 32px 0;
-                gap: 1.8rem;
-                border-bottom: 2px solid #2563eb40;
-                transform: translateY(-150%);
-                opacity: 0;
-                pointer-events: none;
-                transition: 0.3s;
-                box-shadow: 0 20px 30px -10px #00000030;
-                z-index: 40;
-            }
-
-            body.light-theme .nav-menu {
-                background: white;
-            }
-
-            body.dark-theme .nav-menu {
-                background: #1e2a3a;
-            }
-
-            #burger-toggle:checked ~ .nav-menu {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
-            .os-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-            .os-card {
-                width: 100%;
-                max-width: 360px;
-            }
-            .about-stats {
-                gap: 30px;
-            }
-            .stat-number {
-                font-size: 2.5rem;
-            }
-        }
-
-        html {
-            scroll-behavior: smooth;
+        #notification.show {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="light-theme">
-    <canvas id="snow-canvas"></canvas>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
 
-    <header class="header">
-        <div class="container">
-            <div class="logo">NeoLauncher</div>
-
-            <input type="checkbox" id="burger-toggle" class="burger-checkbox" hidden>
-            <label for="burger-toggle" class="burger-icon"><i class="fas fa-bars"></i></label>
-
-            <nav class="nav-menu" id="nav-menu">
-                <a href="#home">Главная</a>
-                <a href="#about">О нас</a>
-                <a href="#features">Возможности</a>
-                <a href="#testimonials">Отзывы</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Контакты</a>
-                <a href="#download" class="nav-btn">Скачать</a>
-                <div id="auth-section">
-                    <button class="profile-btn" id="login-btn" onclick="openAuthModal()">
-                        <i class="fas fa-user"></i> Войти
-                    </button>
+        <!-- МЕНЮ -->
+        <div id="menu">
+            <div class="menu-container">
+                <div class="menu-header">
+                    <div class="menu-title">⚡ TANKI 2025</div>
+                    <div class="menu-stats">
+                        <span>💰 Монеты: <span id="coins">1000</span></span>
+                        <span>🏆 Рейтинг: 1234</span>
+                    </div>
                 </div>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Модальное окно авторизации -->
-    <div class="auth-modal" id="auth-modal">
-        <div class="auth-card">
-            <button class="auth-close" onclick="closeAuthModal()">✕</button>
-            
-            <div class="auth-tabs">
-                <button class="auth-tab active" id="login-tab-btn" onclick="switchAuthTab('login')">Вход</button>
-                <button class="auth-tab" id="register-tab-btn" onclick="switchAuthTab('register')">Регистрация</button>
-            </div>
+                <div class="mode-tabs">
+                    <div class="mode-tab active" onclick="switchMode('single')">Одиночная</div>
+                    <div class="mode-tab" onclick="switchMode('multi')">Мультиплеер</div>
+                    <div class="mode-tab" onclick="openShop()">Магазин</div>
+                </div>
 
-            <!-- Форма входа -->
-            <div class="auth-form active" id="login-form">
-                <input type="text" class="auth-input" id="login-username" placeholder="Логин">
-                <input type="password" class="auth-input" id="login-password" placeholder="Пароль">
-                <button class="auth-submit" onclick="login()">Войти</button>
-                <div class="auth-message" id="login-message"></div>
-            </div>
+                <!-- Одиночная игра -->
+                <div id="single-mode">
+                    <h3 class="section-title">ВЫБЕРИ КАРТУ</h3>
+                    <div class="maps-grid" id="maps-grid"></div>
+                    
+                    <h3 class="section-title">ВЫБЕРИ ТАНК</h3>
+                    <div class="tanks-grid" id="tanks-grid"></div>
+                    
+                    <button class="create-btn" onclick="startSingleGame()" style="width:100%;">НАЧАТЬ БИТВУ</button>
+                </div>
 
-            <!-- Форма регистрации -->
-            <div class="auth-form" id="register-form">
-                <input type="text" class="auth-input" id="register-username" placeholder="Логин">
-                <input type="email" class="auth-input" id="register-email" placeholder="Email">
-                <input type="password" class="auth-input" id="register-password" placeholder="Пароль">
-                <input type="password" class="auth-input" id="register-confirm" placeholder="Повторите пароль">
-                <button class="auth-submit" onclick="register()">Зарегистрироваться</button>
-                <div class="auth-message" id="register-message"></div>
+                <!-- Мультиплеер -->
+                <div id="multi-mode" style="display:none;">
+                    <h3 class="section-title">КОМНАТЫ</h3>
+                    <div class="rooms-panel">
+                        <div id="rooms-list"></div>
+                        <div class="create-room">
+                            <input type="text" class="room-input" id="room-name" value="Комната">
+                            <button class="create-btn" onclick="createRoom()">СОЗДАТЬ</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- КОМНАТА ОЖИДАНИЯ -->
+        <div id="waiting-room" style="display:none;">
+            <h2>КОД КОМНАТЫ</h2>
+            <div class="room-code" id="room-code">ABC123</div>
+            <div class="players-list" id="players-list"></div>
+            <button class="ready-btn" onclick="toggleReady()">ГОТОВ</button>
+        </div>
+
+        <!-- ТАБЛО РЕЗУЛЬТАТОВ -->
+        <div id="scoreboard" style="display:none;">
+            <div class="scoreboard-title">🎮 РЕЗУЛЬТАТЫ</div>
+            <div id="scoreboard-list"></div>
+            <button class="ready-btn" onclick="closeScoreboard()" style="margin-top:20px;">В МЕНЮ</button>
+        </div>
+
+        <!-- МАГАЗИН -->
+        <div id="shop" style="display:none;">
+            <h2 class="menu-title">💰 МАГАЗИН</h2>
+            <div class="shop-item" onclick="buyItem('skin1')">
+                <div class="shop-item-icon">🎨</div>
+                <div class="shop-item-info">
+                    <div>Золотой скин</div>
+                    <div>❤️ +20 здоровья</div>
+                </div>
+                <div class="shop-item-price">500 монет</div>
+            </div>
+            <div class="shop-item" onclick="buyItem('damage1')">
+                <div class="shop-item-icon">⚡</div>
+                <div class="shop-item-info">
+                    <div>Улучшенное орудие</div>
+                    <div>💥 +10 урона</div>
+                </div>
+                <div class="shop-item-price">300 монет</div>
+            </div>
+            <div class="shop-item" onclick="buyItem('speed1')">
+                <div class="shop-item-icon">🚀</div>
+                <div class="shop-item-info">
+                    <div>Турбо-двигатель</div>
+                    <div>⚡ +2 скорости</div>
+                </div>
+                <div class="shop-item-price">400 монет</div>
+            </div>
+            <button class="ready-btn" onclick="closeShop()" style="margin-top:20px;">ЗАКРЫТЬ</button>
+        </div>
+
+        <!-- HUD -->
+        <div id="hud">
+            <div class="hud-panel">
+                <div>⚡ TANKI 2025</div>
+                <div id="current-map"></div>
+                <div class="kills-counter" id="kills">0</div>
+            </div>
+            <div class="hud-panel">
+                <div>❤️ Здоровье</div>
+                <div class="health-bar">
+                    <div class="health-fill" id="health-fill" style="width:100%"></div>
+                </div>
+                <div>💰 <span id="game-coins">0</span></div>
+            </div>
+        </div>
+
+        <!-- МИНИКАРТА -->
+        <div id="minimap">
+            <canvas id="minimap-canvas" width="200" height="200"></canvas>
+        </div>
+
+        <!-- ЧАТ -->
+        <div id="chat">
+            <div id="chat-messages"></div>
+            <div id="chat-input">
+                <input type="text" id="chat-text" placeholder="Сообщение...">
+                <button onclick="sendChat()">➤</button>
+            </div>
+        </div>
+
+        <!-- БОНУСЫ ИНФО -->
+        <div class="bonus-info">
+            <div>❤️ - восстановление</div>
+            <div>🛡️ - щит 5 сек</div>
+            <div>⚡ - ускорение 3 сек</div>
+        </div>
+
+        <!-- УПРАВЛЕНИЕ -->
+        <div id="controls">
+            <div class="control-item"><span class="key">WASD</span> движение</div>
+            <div class="control-item"><span class="key">🖱️</span> прицел</div>
+            <div class="control-item"><span class="key">ЛКМ</span> стрелять</div>
+            <div class="control-item"><span class="key">R</span> перезарядка</div>
+        </div>
+
+        <!-- УВЕДОМЛЕНИЯ -->
+        <div id="notification"></div>
     </div>
 
-    <main>
-        <!-- Hero секция -->
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>
-                        <span class="hero-highlight">NeoLauncher</span><br>
-                        для Minecraft
-                    </h1>
-                    <p class="hero-sub">Быстрый, стильный и удобный лаунчер с чистым интерфейсом и передовыми технологиями.</p>
-                    <div class="hero-actions">
-                        <a href="#download" class="btn-primary">
-                            Скачать <i class="fas fa-arrow-down"></i>
-                        </a>
-                        <div class="platform-icons">
-                            <i class="fab fa-windows"></i>
-                            <i class="fab fa-apple"></i>
-                            <i class="fab fa-linux"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="mockui">
-                        <i class="fas fa-cubes"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- О нас -->
-        <section id="about" class="about">
-            <div class="container">
-                <h2 class="section-title">О проекте NeoLauncher</h2>
-                <div class="about-content">
-                    <p>Мы — команда энтузиастов, объединенных любовью к Minecraft и желанием сделать игру еще комфортнее. NeoLauncher родился из идеи создать лаунчер, который будет не просто инструментом, а настоящим спутником в мире кубических приключений.</p>
-                    <p>Мы ценим ваше время и поэтому сделали упор на скорость, стабильность и красивый минималистичный интерфейс. Каждая деталь продумана, чтобы вы забыли о технических сложностях и просто наслаждались игрой.</p>
-                    
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">50K+</div>
-                            <div class="stat-label">Скачиваний</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">4.8</div>
-                            <div class="stat-label">Рейтинг</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Поддержка</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Возможности -->
-        <section id="features" class="features">
-            <div class="container">
-                <h2 class="section-title">Создан для комфортной игры</h2>
-                <p class="section-subtitle">Продуманный функционал без лишнего шума</p>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-                        <h3>Мгновенный старт</h3>
-                        <p>Запускай игру за секунды благодаря интеллектуальному кэшированию.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-code-branch"></i></div>
-                        <h3>Версии под контролем</h3>
-                        <p>Любая версия Minecraft — от классики до снапшотов — в пару кликов.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-puzzle-piece"></i></div>
-                        <h3>Моды и сборки</h3>
-                        <p>Умный менеджер модов с автоматической установкой зависимостей.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        <h3>Максимальный FPS</h3>
-                        <p>Встроенные оптимизации и настройки для слабых и мощных ПК.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-tshirt"></i></div>
-                        <h3>Кастомизация скинов</h3>
-                        <p>Меняй скины на лету, загружай свои или выбирай из библиотеки.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
-                        <h3>Гибкие настройки</h3>
-                        <p>Тонкая настройка Java-аргументов, разрешений и управления.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Отзывы -->
-        <section id="testimonials" class="testimonials">
-            <div class="container">
-                <h2 class="section-title">Что говорят игроки</h2>
-                <p class="section-subtitle">Более 50 000 пользователей доверяют нам</p>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"Лучший лаунчер, которым я пользовался. Запускается моментально, интерфейс приятный и современный. Отдельное спасибо за удобное управление модами!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">D</div>
-                            <div class="author-info">
-                                <h4>Дмитрий Волков</h4>
-                                <p>Стример</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"Перепробовал много лаунчеров, но NeoLauncher реально выделяется. Никаких тормозов, всё интуитивно понятно. И дизайн шикарный!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">A</div>
-                            <div class="author-info">
-                                <h4>Анна Смирнова</h4>
-                                <p>Билдер</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"Наконец-то лаунчер, который не тормозит на старом ноутбуке. Оптимизация на высоте, FPS в игре вырос明显. Спасибо разработчикам!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">M</div>
-                            <div class="author-info">
-                                <h4>Михаил Петров</h4>
-                                <p>Технический энтузиаст</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ секция -->
-        <section id="faq" class="faq">
-            <div class="container">
-                <h2 class="section-title">Часто задаваемые вопросы</h2>
-                <p class="section-subtitle">Ответы на самые популярные вопросы</p>
-                
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <details>
-                            <summary>Как установить NeoLauncher?</summary>
-                            <div class="faq-answer">
-                                Просто скачай версию для своей операционной системы, запусти установщик и следуй инструкциям. Весь процесс занимает меньше минуты!
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Какие версии Minecraft поддерживаются?</summary>
-                            <div class="faq-answer">
-                                Мы поддерживаем все версии от 1.7.10 до самых свежих снапшотов. Также есть возможность установки модов через Forge и Fabric.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Это безопасно?</summary>
-                            <div class="faq-answer">
-                                Да! Наш лаунчер с открытым исходным кодом, мы не собираем никаких личных данных. Все файлы проверяются антивирусами.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Как установить моды?</summary>
-                            <div class="faq-answer">
-                                В лаунчере есть встроенный менеджер модов. Просто выбери нужную версию Forge/Fabric и нажми "Установить моды".
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Форма обратной связи -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2 class="section-title">Свяжитесь с нами</h2>
-                <p class="section-subtitle">Есть вопросы? Напиши нам!</p>
-                
-                <div class="contact-form">
-                    <form id="contact-form" onsubmit="return sendMessage()">
-                        <div class="form-group">
-                            <input type="text" class="form-input" id="name" placeholder="Ваше имя" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-input" id="email" placeholder="Ваш email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-textarea" id="message" placeholder="Ваше сообщение" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Отправить сообщение</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Скачать -->
-        <section id="download" class="download">
-            <div class="container">
-                <h2 class="section-title">Начни играть по-новому</h2>
-                <p class="section-subtitle">Выбери свою платформу</p>
-                
-                <div class="download-stats">
-                    <span class="download-count" id="download-count">0</span> скачиваний
-                </div>
-                
-                <div class="os-grid">
-                    <div class="os-card recommended">
-                        <div class="os-icon"><i class="fab fa-windows"></i></div>
-                        <h3>Windows</h3>
-                        <div class="os-size">~6.2 MB</div>
-                        <a href="#" class="btn-os" onclick="incrementDownload('windows')">Скачать для Windows</a>
-                    </div>
-                    <div class="os-card">
-                        <div class="os-icon"><i class="fab fa-apple"></i></div>
-                        <h3>macOS</h3>
-                        <div class="os-size">~7.1 MB</div>
-                        <a href="#" class="btn-os" onclick="incrementDownload('mac')">Скачать для macOS</a>
-                    </div>
-                    <div class="os-card">
-                        <div class="os-icon"><i class="fab fa-linux"></i></div>
-                        <h3>Linux</h3>
-                        <div class="os-size">~5.8 MB</div>
-                        <a href="#" class="btn-os" onclick="incrementDownload('linux')">Скачать для Linux</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="socials">
-                <a href="#" aria-label="Discord" id="discord-link"><i class="fab fa-discord"></i></a>
-                <a href="#" aria-label="YouTube" id="youtube-link"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="GitHub" id="github-link"><i class="fab fa-github"></i></a>
-            </div>
-            <p>© 2024 NeoLauncher. Неофициальный проект. Minecraft является товарным знаком Mojang Studios.</p>
-        </div>
-    </footer>
-
     <script>
-        (function() {
-            // ========== АВТОРИЗАЦИЯ ==========
-            let users = JSON.parse(localStorage.getItem('neolauncher_users')) || [];
-            let currentUser = JSON.parse(localStorage.getItem('neolauncher_current_user')) || null;
+        // ========== ЗВУКИ ==========
+        const sounds = {
+            shoot: new Audio('data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVQAAACAgICAf39/f39/f3+AgICAgH9/f39/f3+AgIAAgICAf39/f39/f3+AgIAAgICAf39/f39/f3+AgICAf39/f39/fw=='),
+            explosion: new Audio('data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVQAAAD+/v79/f38/Pz7+/v6+vr5+fn4+Pj39/f29vb19fX09PTz8/Py8vLx8fHw8PDv7+/u7u7t7e3s7Ozs7Ozs7e3t7e3t7g=='),
+            powerup: new Audio('data:audio/wav;base64,UklGRlQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTIAAADMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMw==')
+        };
 
-            function updateAuthUI() {
-                const authSection = document.getElementById('auth-section');
-                if (currentUser) {
-                    authSection.innerHTML = `
-                        <div class="user-profile">
-                            <div class="user-avatar">${currentUser.username[0].toUpperCase()}</div>
-                            <span class="user-name">${currentUser.username}</span>
-                            <button class="logout-btn" onclick="logout()">Выйти</button>
-                        </div>
-                    `;
-                } else {
-                    authSection.innerHTML = `
-                        <button class="profile-btn" id="login-btn" onclick="openAuthModal()">
-                            <i class="fas fa-user"></i> Войти
-                        </button>
-                    `;
-                }
+        // ========== МОДЕЛИ ТАНКОВ ==========
+        const TANK_MODELS = [
+            { name: 'T-90', health: 120, speed: 4, damage: 30, reload: 500, color: '#4a9c4a', icon: '🛡️', price: 0, level: 1 },
+            { name: 'Leopard', health: 100, speed: 5, damage: 35, reload: 400, color: '#4a7c9c', icon: '⚡', price: 500, level: 2 },
+            { name: 'Abrams', health: 150, speed: 3, damage: 40, reload: 600, color: '#9c4a4a', icon: '💪', price: 800, level: 3 },
+            { name: 'Armata', health: 130, speed: 4.5, damage: 45, reload: 550, color: '#9c7c4a', icon: '🚀', price: 1000, level: 4 }
+        ];
+
+        // ========== КАРТЫ С РАБОЧИМИ СТЕНАМИ ==========
+        const MAPS = [
+            {
+                name: '🏜️ Пустыня',
+                preview: '🏜️',
+                walls: []
+            },
+            {
+                name: '🏙️ Город',
+                preview: '🏙️',
+                walls: [
+                    { x: 300, y: 200, w: 200, h: 20 },
+                    { x: 300, y: 400, w: 200, h: 20 },
+                    { x: 500, y: 200, w: 20, h: 220 },
+                    { x: 700, y: 300, w: 150, h: 20 },
+                    { x: 200, y: 500, w: 100, h: 100 },
+                    { x: 800, y: 500, w: 100, h: 100 }
+                ]
+            },
+            {
+                name: '🌀 Лабиринт',
+                preview: '🌀',
+                walls: [
+                    { x: 300, y: 150, w: 20, h: 500 },
+                    { x: 500, y: 150, w: 20, h: 500 },
+                    { x: 700, y: 150, w: 20, h: 500 },
+                    { x: 900, y: 150, w: 20, h: 500 },
+                    { x: 150, y: 250, w: 200, h: 20 },
+                    { x: 450, y: 350, w: 200, h: 20 },
+                    { x: 750, y: 450, w: 200, h: 20 }
+                ]
+            },
+            {
+                name: '⚔️ Арена',
+                preview: '⚔️',
+                walls: [
+                    { x: 200, y: 200, w: 800, h: 20 },
+                    { x: 200, y: 600, w: 800, h: 20 },
+                    { x: 200, y: 200, w: 20, h: 420 },
+                    { x: 980, y: 200, w: 20, h: 420 },
+                    { x: 400, y: 300, w: 100, h: 100 },
+                    { x: 700, y: 400, w: 100, h: 100 }
+                ]
+            }
+        ];
+
+        // ========== КЛАСС СТЕНЫ ==========
+        class Wall {
+            constructor(x, y, w, h) {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
             }
 
-            window.openAuthModal = function() {
-                document.getElementById('auth-modal').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            window.closeAuthModal = function() {
-                document.getElementById('auth-modal').classList.remove('active');
-                document.body.style.overflow = 'auto';
-                document.getElementById('login-message').textContent = '';
-                document.getElementById('register-message').textContent = '';
-            }
-
-            window.switchAuthTab = function(tab) {
-                if (tab === 'login') {
-                    document.getElementById('login-tab-btn').classList.add('active');
-                    document.getElementById('register-tab-btn').classList.remove('active');
-                    document.getElementById('login-form').classList.add('active');
-                    document.getElementById('register-form').classList.remove('active');
-                } else {
-                    document.getElementById('register-tab-btn').classList.add('active');
-                    document.getElementById('login-tab-btn').classList.remove('active');
-                    document.getElementById('register-form').classList.add('active');
-                    document.getElementById('login-form').classList.remove('active');
-                }
-            }
-
-            window.register = function() {
-                const username = document.getElementById('register-username').value.trim();
-                const email = document.getElementById('register-email').value.trim();
-                const password = document.getElementById('register-password').value;
-                const confirm = document.getElementById('register-confirm').value;
-
-                if (!username || !email || !password) {
-                    document.getElementById('register-message').textContent = 'Заполните все поля';
-                    return;
-                }
-
-                if (password !== confirm) {
-                    document.getElementById('register-message').textContent = 'Пароли не совпадают';
-                    return;
-                }
-
-                if (users.find(u => u.username === username)) {
-                    document.getElementById('register-message').textContent = 'Пользователь уже существует';
-                    return;
-                }
-
-                const newUser = {
-                    username,
-                    email,
-                    password,
-                    registeredAt: new Date().toISOString()
-                };
-
-                users.push(newUser);
-                localStorage.setItem('neolauncher_users', JSON.stringify(users));
-
-                document.getElementById('register-message').className = 'auth-message auth-success';
-                document.getElementById('register-message').textContent = 'Регистрация успешна! Теперь войдите.';
+            draw(ctx) {
+                ctx.fillStyle = '#8B7355';
+                ctx.strokeStyle = '#5D4037';
+                ctx.lineWidth = 3;
+                ctx.fillRect(this.x, this.y, this.w, this.h);
+                ctx.strokeRect(this.x, this.y, this.w, this.h);
                 
-                setTimeout(() => {
-                    switchAuthTab('login');
-                }, 2000);
-            }
-
-            window.login = function() {
-                const username = document.getElementById('login-username').value.trim();
-                const password = document.getElementById('login-password').value;
-
-                const user = users.find(u => u.username === username && u.password === password);
-
-                if (user) {
-                    currentUser = {
-                        username: user.username,
-                        email: user.email
-                    };
-                    localStorage.setItem('neolauncher_current_user', JSON.stringify(currentUser));
-                    updateAuthUI();
-                    closeAuthModal();
-                } else {
-                    document.getElementById('login-message').textContent = 'Неверный логин или пароль';
+                // Текстура кирпича
+                ctx.strokeStyle = '#5D4037';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < this.h; i += 20) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y + i);
+                    ctx.lineTo(this.x + this.w, this.y + i);
+                    ctx.stroke();
+                }
+                for (let i = 0; i < this.w; i += 30) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x + i, this.y);
+                    ctx.lineTo(this.x + i, this.y + this.h);
+                    ctx.stroke();
                 }
             }
 
-            window.logout = function() {
-                currentUser = null;
-                localStorage.removeItem('neolauncher_current_user');
-                updateAuthUI();
+            checkCollision(x, y, w, h) {
+                return (x < this.x + this.w &&
+                        x + w > this.x &&
+                        y < this.y + this.h &&
+                        y + h > this.y);
             }
 
-            // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
+            checkCircleCollision(cx, cy, radius) {
+                const closestX = Math.max(this.x, Math.min(cx, this.x + this.w));
+                const closestY = Math.max(this.y, Math.min(cy, this.y + this.h));
+                const dx = cx - closestX;
+                const dy = cy - closestY;
+                return Math.sqrt(dx*dx + dy*dy) < radius;
+            }
+        }
+
+        // ========== КЛАСС БОНУСА ==========
+        class Bonus {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.active = true;
+                this.respawnTime = 0;
+                
+                if (type === 'health') {
+                    this.color = '#ff4444';
+                    this.icon = '❤️';
+                } else if (type === 'shield') {
+                    this.color = '#4a9c4a';
+                    this.icon = '🛡️';
+                } else if (type === 'speed') {
+                    this.color = '#ffaa00';
+                    this.icon = '⚡';
+                }
+            }
             
-            // Плавный скролл и закрытие бургера
-            const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
-            const burger = document.getElementById('burger-toggle');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === "#") return;
-                    const targetEl = document.querySelector(targetId);
-                    if (targetEl) {
-                        targetEl.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    if (burger) burger.checked = false;
-                });
-            });
-
-            // Кнопка в hero
-            const heroBtn = document.querySelector('.btn-primary');
-            if (heroBtn) {
-                heroBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector('#download');
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                });
+            draw(ctx) {
+                if (!this.active) return;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 15, 0, Math.PI*2);
+                ctx.fill();
+                ctx.fillStyle = 'white';
+                ctx.font = '20px Arial';
+                ctx.fillText(this.icon, this.x-12, this.y+7);
             }
-
-            // Переключение темы
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const icon = themeToggle.querySelector('i');
-
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light-theme')) {
-                    body.classList.remove('light-theme');
-                    body.classList.add('dark-theme');
-                    icon.className = 'fas fa-sun';
-                } else {
-                    body.classList.remove('dark-theme');
-                    body.classList.add('light-theme');
-                    icon.className = 'fas fa-moon';
+            
+            checkCollision(tank) {
+                if (!this.active) return false;
+                const dx = tank.x - this.x;
+                const dy = tank.y - this.y;
+                if (Math.sqrt(dx*dx + dy*dy) < 40) {
+                    this.active = false;
+                    this.respawnTime = Date.now() + 10000;
+                    sounds.powerup.play();
+                    return true;
                 }
-            });
+                return false;
+            }
+            
+            update() {
+                if (!this.active && Date.now() > this.respawnTime) {
+                    this.active = true;
+                }
+            }
+        }
 
-            // Снегопад с улучшенной производительностью
-            const canvas = document.getElementById('snow-canvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-            let animationFrame;
-
-            function initCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width;
-                canvas.height = height;
+        // ========== КЛАСС ТАНКА ==========
+        class Tank {
+            constructor(model, x, y, playerId = null) {
+                this.model = model;
+                this.x = x;
+                this.y = y;
+                this.width = 40;
+                this.height = 60;
+                this.angle = 0;
+                this.health = model.health;
+                this.maxHealth = model.health;
+                this.speed = model.speed;
+                this.damage = model.damage;
+                this.reloadTime = model.reload;
+                this.lastShot = 0;
+                this.playerId = playerId;
+                this.color = model.color;
+                this.kills = 0;
+                this.shield = false;
+                this.speedBoost = false;
+                this.shieldTime = 0;
+                this.boostTime = 0;
             }
 
-            function createParticles(count) {
-                particles = [];
-                for (let i = 0; i < count; i++) {
-                    particles.push({
-                        x: Math.random() * width,
-                        y: Math.random() * height,
-                        radius: Math.random() * 3.5 + 0.8,
-                        speed: Math.random() * 1.2 + 0.2,
-                        opacity: Math.random() * 0.4 + 0.2,
-                        sway: Math.random() * 0.5
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                
+                ctx.fillStyle = this.color;
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.fillRect(-20, -30, 40, 60);
+                ctx.strokeRect(-20, -30, 40, 60);
+                
+                ctx.fillStyle = '#333';
+                ctx.beginPath();
+                ctx.arc(0, 0, 15, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                
+                ctx.fillStyle = '#666';
+                ctx.fillRect(15, -4, 25, 8);
+                
+                ctx.restore();
+
+                // Эффекты
+                if (this.shield) {
+                    ctx.strokeStyle = '#4a9c4a';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 30, 0, Math.PI*2);
+                    ctx.stroke();
+                }
+
+                // Полоска здоровья
+                const percent = this.health / this.maxHealth;
+                ctx.fillStyle = '#333';
+                ctx.fillRect(this.x - 25, this.y - 45, 50, 5);
+                
+                let healthColor = '#ff4444';
+                if (percent > 0.6) healthColor = '#4a9c4a';
+                else if (percent > 0.3) healthColor = '#ffaa00';
+                
+                ctx.fillStyle = healthColor;
+                ctx.fillRect(this.x - 25, this.y - 45, 50 * percent, 5);
+                
+                // ID игрока
+                if (this.playerId) {
+                    ctx.fillStyle = 'white';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Player', this.x, this.y - 60);
+                }
+            }
+
+            takeDamage(amount) {
+                if (this.shield) {
+                    this.shield = false;
+                    return false;
+                }
+                this.health -= amount;
+                return this.health <= 0;
+            }
+
+            canShoot() {
+                return Date.now() - this.lastShot > this.reloadTime;
+            }
+
+            shoot() {
+                this.lastShot = Date.now();
+                sounds.shoot.play();
+                return {
+                    x: this.x + Math.cos(this.angle) * 30,
+                    y: this.y + Math.sin(this.angle) * 30,
+                    vx: Math.cos(this.angle) * 12,
+                    vy: Math.sin(this.angle) * 12,
+                    damage: this.damage,
+                    owner: this
+                };
+            }
+            
+            update() {
+                if (this.shield && Date.now() > this.shieldTime) {
+                    this.shield = false;
+                }
+                if (this.speedBoost && Date.now() > this.boostTime) {
+                    this.speedBoost = false;
+                }
+            }
+        }
+
+        // ========== ПЕРЕМЕННЫЕ ==========
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const minimapCanvas = document.getElementById('minimap-canvas');
+        const minimapCtx = minimapCanvas.getContext('2d');
+        
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        let playerTank = null;
+        let enemies = [];
+        let bullets = [];
+        let walls = [];
+        let bonuses = [];
+        let kills = 0;
+        let gameRunning = false;
+        let keys = {};
+        let mouse = { x: 0, y: 0 };
+        let mouseDown = false;
+        let coins = 1000;
+
+        // Мультиплеер
+        let rooms = [];
+        let currentRoom = null;
+        let playerId = Math.random().toString(36).substr(2, 8);
+        let isReady = false;
+        let chatMessages = [];
+
+        // Выбранные элементы
+        let selectedMap = null;
+        let selectedTank = null;
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        function initMenu() {
+            const mapsGrid = document.getElementById('maps-grid');
+            MAPS.forEach((map, index) => {
+                const card = document.createElement('div');
+                card.className = 'map-card';
+                card.onclick = () => selectMap(index);
+                card.innerHTML = `
+                    <div class="map-preview">${map.preview}</div>
+                    <div class="map-name">${map.name}</div>
+                `;
+                mapsGrid.appendChild(card);
+            });
+
+            const tanksGrid = document.getElementById('tanks-grid');
+            TANK_MODELS.forEach((tank, index) => {
+                const card = document.createElement('div');
+                card.className = 'tank-card';
+                card.onclick = () => selectTank(index);
+                card.innerHTML = `
+                    <div class="tank-icon">${tank.icon}</div>
+                    <div class="tank-name">${tank.name}</div>
+                    <div class="tank-level">УРОВЕНЬ ${tank.level}</div>
+                `;
+                tanksGrid.appendChild(card);
+            });
+
+            selectMap(0);
+            selectTank(0);
+            updateRoomsList();
+        }
+
+        function selectMap(index) {
+            document.querySelectorAll('.map-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.map-card')[index].classList.add('selected');
+            selectedMap = MAPS[index];
+        }
+
+        function selectTank(index) {
+            document.querySelectorAll('.tank-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.tank-card')[index].classList.add('selected');
+            selectedTank = TANK_MODELS[index];
+        }
+
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('single-mode').style.display = mode === 'single' ? 'block' : 'none';
+            document.getElementById('multi-mode').style.display = mode === 'multi' ? 'block' : 'none';
+        }
+
+        // ========== ОДИНОЧНАЯ ИГРА ==========
+        function startSingleGame() {
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('current-map').textContent = selectedMap.name;
+            
+            walls = selectedMap.walls.map(w => new Wall(w.x, w.y, w.w, w.h));
+            
+            playerTank = new Tank(selectedTank, 200, 400);
+            
+            enemies = [
+                new Tank(TANK_MODELS[1], 900, 300),
+                new Tank(TANK_MODELS[2], 800, 500)
+            ];
+            
+            bonuses = [
+                new Bonus(400, 300, 'health'),
+                new Bonus(600, 400, 'shield'),
+                new Bonus(800, 300, 'speed')
+            ];
+            
+            kills = 0;
+            document.getElementById('kills').textContent = kills;
+            gameRunning = true;
+            showNotification('🎮 БИТВА НАЧАЛАСЬ!');
+        }
+
+        // ========== ПРОВЕРКА СТЕН ==========
+        function checkWallCollision(x, y, width, height) {
+            for (let wall of walls) {
+                if (wall.checkCollision(x - width/2, y - height/2, width, height)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ========== МУЛЬТИПЛЕЕР ==========
+        function createRoom() {
+            const roomName = document.getElementById('room-name').value;
+            const roomId = Math.random().toString(36).substr(2, 6).toUpperCase();
+            
+            currentRoom = {
+                id: roomId,
+                name: roomName,
+                players: [{
+                    id: playerId,
+                    ready: false,
+                    tank: selectedTank,
+                    kills: 0
+                }]
+            };
+            
+            rooms.push(currentRoom);
+            joinRoom(roomId);
+        }
+
+        function joinRoom(roomId) {
+            const room = rooms.find(r => r.id === roomId);
+            if (room) {
+                currentRoom = room;
+                if (!room.players.find(p => p.id === playerId)) {
+                    room.players.push({
+                        id: playerId,
+                        ready: false,
+                        tank: selectedTank,
+                        kills: 0
                     });
                 }
-            }
-
-            function drawSnow() {
-                ctx.clearRect(0, 0, width, height);
                 
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = 'rgba(255,255,255,0.5)';
-                    ctx.fill();
-                    
-                    p.y += p.speed;
-                    p.x += Math.sin(Date.now() * 0.002 + p.y * 0.02) * 0.15;
-                    
-                    if (p.y > height + 10) {
-                        p.y = -10;
-                        p.x = Math.random() * width;
+                document.getElementById('menu').style.display = 'none';
+                document.getElementById('waiting-room').style.display = 'block';
+                document.getElementById('room-code').textContent = room.id;
+                
+                updatePlayersList();
+            }
+        }
+
+        function updateRoomsList() {
+            const roomsList = document.getElementById('rooms-list');
+            roomsList.innerHTML = rooms.map(room => `
+                <div class="room-item">
+                    <div class="room-info">
+                        <span class="room-name">${room.name}</span>
+                        <span>${room.players.length}/4 игроков</span>
+                    </div>
+                    <button class="join-btn" onclick="joinRoom('${room.id}')">ВОЙТИ</button>
+                </div>
+            `).join('');
+        }
+
+        function updatePlayersList() {
+            if (!currentRoom) return;
+            
+            const list = document.getElementById('players-list');
+            list.innerHTML = currentRoom.players.map(p => `
+                <div class="player-item">
+                    <span>👤 ${p.id === playerId ? 'Вы' : 'Игрок'}</span>
+                    <span>${p.kills} 💥</span>
+                    ${p.ready ? '<span class="player-ready">✅ ГОТОВ</span>' : ''}
+                </div>
+            `).join('');
+        }
+
+        function toggleReady() {
+            if (!currentRoom) return;
+            
+            const player = currentRoom.players.find(p => p.id === playerId);
+            if (player) {
+                player.ready = !player.ready;
+                updatePlayersList();
+                
+                const allReady = currentRoom.players.length >= 2 && 
+                                 currentRoom.players.every(p => p.ready);
+                
+                if (allReady) {
+                    startMultiGame();
+                }
+            }
+        }
+
+        function startMultiGame() {
+            document.getElementById('waiting-room').style.display = 'none';
+            
+            walls = selectedMap.walls.map(w => new Wall(w.x, w.y, w.w, w.h));
+            
+            let index = 0;
+            currentRoom.players.forEach(p => {
+                const x = 200 + index * 250;
+                const y = 400;
+                const tank = new Tank(p.tank, x, y, p.id);
+                if (p.id === playerId) {
+                    playerTank = tank;
+                } else {
+                    enemies.push(tank);
+                }
+                index++;
+            });
+            
+            bonuses = [
+                new Bonus(400, 300, 'health'),
+                new Bonus(600, 400, 'shield'),
+                new Bonus(800, 300, 'speed')
+            ];
+            
+            gameRunning = true;
+            showNotification('🎮 БИТВА НАЧАЛАСЬ!');
+        }
+
+        // ========== ЧАТ ==========
+        function sendChat() {
+            const input = document.getElementById('chat-text');
+            const text = input.value.trim();
+            if (text) {
+                chatMessages.push({ player: 'Вы', text: text });
+                updateChat();
+                input.value = '';
+            }
+        }
+
+        function updateChat() {
+            const messages = document.getElementById('chat-messages');
+            messages.innerHTML = chatMessages.slice(-10).map(m => 
+                `<div><b>${m.player}:</b> ${m.text}</div>`
+            ).join('');
+        }
+
+        // ========== МАГАЗИН ==========
+        function openShop() {
+            document.getElementById('shop').style.display = 'block';
+        }
+
+        function closeShop() {
+            document.getElementById('shop').style.display = 'none';
+        }
+
+        function buyItem(item) {
+            if (item === 'skin1' && coins >= 500) {
+                coins -= 500;
+                showNotification('✅ Куплен золотой скин!');
+            } else if (item === 'damage1' && coins >= 300) {
+                coins -= 300;
+                showNotification('✅ Куплено улучшение орудия!');
+            } else if (item === 'speed1' && coins >= 400) {
+                coins -= 400;
+                showNotification('✅ Куплен турбо-двигатель!');
+            } else {
+                showNotification('❌ Недостаточно монет!');
+            }
+            document.getElementById('coins').textContent = coins;
+        }
+
+        // ========== ТАБЛО РЕЗУЛЬТАТОВ ==========
+        function showScoreboard() {
+            const list = document.getElementById('scoreboard-list');
+            const allTanks = [playerTank, ...enemies];
+            allTanks.sort((a,b) => b.kills - a.kills);
+            
+            list.innerHTML = allTanks.map(t => `
+                <div class="scoreboard-item">
+                    <span>${t === playerTank ? '👤 Вы' : '🤖 Враг'}</span>
+                    <span>💥 ${t.kills}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('scoreboard').style.display = 'block';
+        }
+
+        function closeScoreboard() {
+            document.getElementById('scoreboard').style.display = 'none';
+            location.reload();
+        }
+
+        // ========== УПРАВЛЕНИЕ ==========
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+            if (e.code === 'KeyR' && playerTank) {
+                playerTank.lastShot = 0;
+                showNotification('⚡ Перезаряжено!');
+            }
+        });
+
+        document.addEventListener('keyup', (e) => keys[e.code] = false);
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            mouse.y = (e.clientY - rect.top) * (canvas.height / rect.height);
+        });
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (e.button === 0) mouseDown = true;
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+            if (e.button === 0) mouseDown = false;
+        });
+
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // ========== ИГРОВОЙ ЦИКЛ ==========
+        function update() {
+            if (!playerTank || !gameRunning) return;
+
+            // Управление игроком
+            let moveX = 0, moveY = 0;
+            let currentSpeed = playerTank.speed * (playerTank.speedBoost ? 2 : 1);
+            
+            if (keys['KeyW']) moveY -= currentSpeed;
+            if (keys['KeyS']) moveY += currentSpeed;
+            if (keys['KeyA']) moveX -= currentSpeed;
+            if (keys['KeyD']) moveX += currentSpeed;
+            
+            if (moveX !== 0 || moveY !== 0) {
+                if (moveX !== 0) {
+                    const newX = playerTank.x + moveX;
+                    if (!checkWallCollision(newX, playerTank.y, 40, 60)) {
+                        playerTank.x = newX;
                     }
-                });
+                }
+                if (moveY !== 0) {
+                    const newY = playerTank.y + moveY;
+                    if (!checkWallCollision(playerTank.x, newY, 40, 60)) {
+                        playerTank.y = newY;
+                    }
+                }
+            }
+            
+            playerTank.angle = Math.atan2(mouse.y - playerTank.y, mouse.x - playerTank.x);
+            
+            // Стрельба
+            if (mouseDown && playerTank.canShoot()) {
+                bullets.push(playerTank.shoot());
+            }
+            
+            // Бонусы
+            bonuses.forEach(b => {
+                if (b.checkCollision(playerTank)) {
+                    if (b.type === 'health') {
+                        playerTank.health = Math.min(playerTank.maxHealth, playerTank.health + 30);
+                    } else if (b.type === 'shield') {
+                        playerTank.shield = true;
+                        playerTank.shieldTime = Date.now() + 5000;
+                    } else if (b.type === 'speed') {
+                        playerTank.speedBoost = true;
+                        playerTank.boostTime = Date.now() + 3000;
+                    }
+                    document.getElementById('health-fill').style.width = 
+                        (playerTank.health / playerTank.maxHealth * 100) + '%';
+                }
+                b.update();
+            });
+            
+            // Враги
+            enemies.forEach(enemy => {
+                const dx = playerTank.x - enemy.x;
+                const dy = playerTank.y - enemy.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
                 
-                animationFrame = requestAnimationFrame(drawSnow);
-            }
-
-            window.addEventListener('resize', () => {
-                initCanvas();
-                createParticles(130);
-            });
-
-            initCanvas();
-            createParticles(130);
-            drawSnow();
-
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    cancelAnimationFrame(animationFrame);
-                } else {
-                    drawSnow();
+                if (dist < 500) {
+                    enemy.angle = Math.atan2(dy, dx);
+                    
+                    if (dist > 200 && Math.random() < 0.02) {
+                        bullets.push(enemy.shoot());
+                    }
                 }
             });
-
-            // Счетчик скачиваний
-            let downloads = localStorage.getItem('downloads') || 0;
-            document.getElementById('download-count').textContent = downloads;
-
-            window.incrementDownload = function(os) {
-                downloads++;
-                localStorage.setItem('downloads', downloads);
-                document.getElementById('download-count').textContent = downloads;
-                alert(`Скачивание ${os} версии началось! Спасибо!`);
-                return false;
-            }
-
-            // Форма обратной связи
-            window.sendMessage = function() {
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
+            
+            // Пули
+            bullets = bullets.filter(b => {
+                b.x += b.vx;
+                b.y += b.vy;
                 
-                if (currentUser) {
-                    alert(`Спасибо, ${name}! Мы ответим вам на ${email} в ближайшее время.`);
+                // Проверка стен
+                for (let wall of walls) {
+                    if (wall.checkCircleCollision(b.x, b.y, 5)) {
+                        return false;
+                    }
+                }
+                
+                if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) {
+                    return false;
+                }
+                
+                if (b.owner === playerTank) {
+                    for (let i = 0; i < enemies.length; i++) {
+                        const enemy = enemies[i];
+                        if (Math.abs(b.x - enemy.x) < 25 && Math.abs(b.y - enemy.y) < 25) {
+                            if (enemy.takeDamage(b.damage)) {
+                                enemies.splice(i, 1);
+                                kills++;
+                                playerTank.kills++;
+                                coins += 50;
+                                document.getElementById('kills').textContent = kills;
+                                document.getElementById('game-coins').textContent = coins;
+                                sounds.explosion.play();
+                                showNotification('💥 +50 монет!');
+                            }
+                            return false;
+                        }
+                    }
                 } else {
-                    alert('Пожалуйста, войдите в аккаунт, чтобы отправить сообщение.');
-                    openAuthModal();
+                    if (Math.abs(b.x - playerTank.x) < 25 && Math.abs(b.y - playerTank.y) < 25) {
+                        playerTank.takeDamage(b.damage);
+                        const percent = (playerTank.health / playerTank.maxHealth) * 100;
+                        document.getElementById('health-fill').style.width = percent + '%';
+                        
+                        if (playerTank.health <= 0) {
+                            gameRunning = false;
+                            showScoreboard();
+                        }
+                        return false;
+                    }
                 }
-                document.getElementById('contact-form').reset();
-                return false;
-            }
-
-            // Ссылки на соцсети (замени на свои)
-            document.getElementById('discord-link').href = 'https://discord.gg/твой-сервер';
-            document.getElementById('youtube-link').href = 'https://youtube.com/c/твой-канал';
-            document.getElementById('github-link').href = 'https://github.com/kirillDev342/neyrolauncher-site';
-
-            // Инициализация UI
-            updateAuthUI();
-
-            // Закрытие модалки по клику вне её
-            document.getElementById('auth-modal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeAuthModal();
-                }
+                
+                return true;
             });
-        })();
+            
+            // Победа
+            if (enemies.length === 0) {
+                gameRunning = false;
+                coins += 200;
+                showScoreboard();
+            }
+            
+            updateMinimap();
+        }
+
+        function updateMinimap() {
+            minimapCtx.clearRect(0, 0, 200, 200);
+            
+            minimapCtx.fillStyle = '#8B7355';
+            walls.forEach(w => {
+                minimapCtx.fillRect(w.x / 6, w.y / 4, w.w / 6, w.h / 4);
+            });
+            
+            minimapCtx.fillStyle = '#4a9c4a';
+            minimapCtx.beginPath();
+            minimapCtx.arc(playerTank.x / 6, playerTank.y / 4, 3, 0, Math.PI*2);
+            minimapCtx.fill();
+            
+            minimapCtx.fillStyle = '#ff4444';
+            enemies.forEach(e => {
+                minimapCtx.beginPath();
+                minimapCtx.arc(e.x / 6, e.y / 4, 2, 0, Math.PI*2);
+                minimapCtx.fill();
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#1a3a5a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            ctx.fillRect(100, 50, 200, 40);
+            ctx.fillRect(500, 100, 250, 30);
+            
+            walls.forEach(w => w.draw(ctx));
+            bonuses.forEach(b => b.draw(ctx));
+            
+            enemies.forEach(e => e.draw(ctx));
+            if (playerTank) playerTank.draw(ctx);
+            
+            bullets.forEach(b => {
+                ctx.fillStyle = '#ffaa00';
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, 5, 0, Math.PI*2);
+                ctx.fill();
+            });
+        }
+
+        function showNotification(text) {
+            const el = document.getElementById('notification');
+            el.textContent = text;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 2000);
+        }
+
+        function gameLoop() {
+            if (gameRunning) update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // ========== СТАРТ ==========
+        initMenu();
+        gameLoop();
     </script>
 </body>
 </html>

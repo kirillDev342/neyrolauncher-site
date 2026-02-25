@@ -244,6 +244,198 @@
             color: white !important;
         }
 
+        /* Кнопка профиля */
+        .profile-btn {
+            background: transparent;
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .profile-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Модальное окно авторизации */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-card {
+            background: var(--bg-primary);
+            border-radius: 40px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            animation: modalSlide 0.3s;
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 2px solid #2563eb;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .auth-tab.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+
+        .auth-input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(145deg, #2563eb, #4f46e5);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px #2563eb;
+        }
+
+        .auth-message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #ff4444;
+        }
+
+        .auth-success {
+            color: #4a9c4a;
+        }
+
+        /* Профиль пользователя */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #2563eb, #6d28d9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff4444;
+            color: white;
+        }
+
         /* Переключатель темы */
         .theme-toggle {
             background: transparent;
@@ -475,7 +667,7 @@
             line-height: 1.6;
         }
 
-        /* Секция отзывов (новая) */
+        /* Секция отзывов */
         .testimonials {
             padding: 80px 0;
             transition: background 0.3s;
@@ -548,6 +740,126 @@
         .author-info p {
             font-size: 0.9rem;
             opacity: 0.6;
+        }
+
+        /* FAQ секция */
+        .faq {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        details {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Форма обратной связи */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(145deg, #2563eb, #4f46e5);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px #2563eb;
         }
 
         /* Секция скачивания */
@@ -690,128 +1002,6 @@
             opacity: 0.6;
         }
 
-        /* НОВЫЕ СЕКЦИИ */
-
-        /* FAQ секция */
-        .faq {
-            padding: 80px 0;
-            background: var(--bg-secondary);
-        }
-
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            margin-bottom: 20px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        details {
-            background: var(--bg-primary);
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-        }
-
-        summary {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        summary::after {
-            content: '▼';
-            font-size: 0.8rem;
-            transition: transform 0.3s;
-        }
-
-        details[open] summary::after {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-        }
-
-        /* Форма обратной связи */
-        .contact {
-            padding: 80px 0;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-primary);
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus {
-            border-color: #2563eb;
-            outline: none;
-        }
-
-        .form-textarea {
-            width: 100%;
-            padding: 15px 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-textarea:focus {
-            border-color: #2563eb;
-            outline: none;
-        }
-
-        .submit-btn {
-            background: linear-gradient(145deg, #2563eb, #4f46e5);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px #2563eb;
-        }
-
         /* Счетчик скачиваний */
         .download-stats {
             text-align: center;
@@ -926,7 +1116,7 @@
             <input type="checkbox" id="burger-toggle" class="burger-checkbox" hidden>
             <label for="burger-toggle" class="burger-icon"><i class="fas fa-bars"></i></label>
 
-            <nav class="nav-menu">
+            <nav class="nav-menu" id="nav-menu">
                 <a href="#home">Главная</a>
                 <a href="#about">О нас</a>
                 <a href="#features">Возможности</a>
@@ -934,12 +1124,47 @@
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Контакты</a>
                 <a href="#download" class="nav-btn">Скачать</a>
+                <div id="auth-section">
+                    <button class="profile-btn" id="login-btn" onclick="openAuthModal()">
+                        <i class="fas fa-user"></i> Войти
+                    </button>
+                </div>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
                     <i class="fas fa-moon"></i>
                 </button>
             </nav>
         </div>
     </header>
+
+    <!-- Модальное окно авторизации -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="auth-card">
+            <button class="auth-close" onclick="closeAuthModal()">✕</button>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="login-tab-btn" onclick="switchAuthTab('login')">Вход</button>
+                <button class="auth-tab" id="register-tab-btn" onclick="switchAuthTab('register')">Регистрация</button>
+            </div>
+
+            <!-- Форма входа -->
+            <div class="auth-form active" id="login-form">
+                <input type="text" class="auth-input" id="login-username" placeholder="Логин">
+                <input type="password" class="auth-input" id="login-password" placeholder="Пароль">
+                <button class="auth-submit" onclick="login()">Войти</button>
+                <div class="auth-message" id="login-message"></div>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="auth-form" id="register-form">
+                <input type="text" class="auth-input" id="register-username" placeholder="Логин">
+                <input type="email" class="auth-input" id="register-email" placeholder="Email">
+                <input type="password" class="auth-input" id="register-password" placeholder="Пароль">
+                <input type="password" class="auth-input" id="register-confirm" placeholder="Повторите пароль">
+                <button class="auth-submit" onclick="register()">Зарегистрироваться</button>
+                <div class="auth-message" id="register-message"></div>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Hero секция -->
@@ -1216,6 +1441,121 @@
 
     <script>
         (function() {
+            // ========== АВТОРИЗАЦИЯ ==========
+            let users = JSON.parse(localStorage.getItem('neolauncher_users')) || [];
+            let currentUser = JSON.parse(localStorage.getItem('neolauncher_current_user')) || null;
+
+            function updateAuthUI() {
+                const authSection = document.getElementById('auth-section');
+                if (currentUser) {
+                    authSection.innerHTML = `
+                        <div class="user-profile">
+                            <div class="user-avatar">${currentUser.username[0].toUpperCase()}</div>
+                            <span class="user-name">${currentUser.username}</span>
+                            <button class="logout-btn" onclick="logout()">Выйти</button>
+                        </div>
+                    `;
+                } else {
+                    authSection.innerHTML = `
+                        <button class="profile-btn" id="login-btn" onclick="openAuthModal()">
+                            <i class="fas fa-user"></i> Войти
+                        </button>
+                    `;
+                }
+            }
+
+            window.openAuthModal = function() {
+                document.getElementById('auth-modal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            window.closeAuthModal = function() {
+                document.getElementById('auth-modal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+                document.getElementById('login-message').textContent = '';
+                document.getElementById('register-message').textContent = '';
+            }
+
+            window.switchAuthTab = function(tab) {
+                if (tab === 'login') {
+                    document.getElementById('login-tab-btn').classList.add('active');
+                    document.getElementById('register-tab-btn').classList.remove('active');
+                    document.getElementById('login-form').classList.add('active');
+                    document.getElementById('register-form').classList.remove('active');
+                } else {
+                    document.getElementById('register-tab-btn').classList.add('active');
+                    document.getElementById('login-tab-btn').classList.remove('active');
+                    document.getElementById('register-form').classList.add('active');
+                    document.getElementById('login-form').classList.remove('active');
+                }
+            }
+
+            window.register = function() {
+                const username = document.getElementById('register-username').value.trim();
+                const email = document.getElementById('register-email').value.trim();
+                const password = document.getElementById('register-password').value;
+                const confirm = document.getElementById('register-confirm').value;
+
+                if (!username || !email || !password) {
+                    document.getElementById('register-message').textContent = 'Заполните все поля';
+                    return;
+                }
+
+                if (password !== confirm) {
+                    document.getElementById('register-message').textContent = 'Пароли не совпадают';
+                    return;
+                }
+
+                if (users.find(u => u.username === username)) {
+                    document.getElementById('register-message').textContent = 'Пользователь уже существует';
+                    return;
+                }
+
+                const newUser = {
+                    username,
+                    email,
+                    password,
+                    registeredAt: new Date().toISOString()
+                };
+
+                users.push(newUser);
+                localStorage.setItem('neolauncher_users', JSON.stringify(users));
+
+                document.getElementById('register-message').className = 'auth-message auth-success';
+                document.getElementById('register-message').textContent = 'Регистрация успешна! Теперь войдите.';
+                
+                setTimeout(() => {
+                    switchAuthTab('login');
+                }, 2000);
+            }
+
+            window.login = function() {
+                const username = document.getElementById('login-username').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                const user = users.find(u => u.username === username && u.password === password);
+
+                if (user) {
+                    currentUser = {
+                        username: user.username,
+                        email: user.email
+                    };
+                    localStorage.setItem('neolauncher_current_user', JSON.stringify(currentUser));
+                    updateAuthUI();
+                    closeAuthModal();
+                } else {
+                    document.getElementById('login-message').textContent = 'Неверный логин или пароль';
+                }
+            }
+
+            window.logout = function() {
+                currentUser = null;
+                localStorage.removeItem('neolauncher_current_user');
+                updateAuthUI();
+            }
+
+            // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
+            
             // Плавный скролл и закрытие бургера
             const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
             const burger = document.getElementById('burger-toggle');
@@ -1346,7 +1686,12 @@
                 const email = document.getElementById('email').value;
                 const message = document.getElementById('message').value;
                 
-                alert(`Спасибо, ${name}! Мы ответим вам на ${email} в ближайшее время.`);
+                if (currentUser) {
+                    alert(`Спасибо, ${name}! Мы ответим вам на ${email} в ближайшее время.`);
+                } else {
+                    alert('Пожалуйста, войдите в аккаунт, чтобы отправить сообщение.');
+                    openAuthModal();
+                }
                 document.getElementById('contact-form').reset();
                 return false;
             }
@@ -1355,6 +1700,16 @@
             document.getElementById('discord-link').href = 'https://discord.gg/твой-сервер';
             document.getElementById('youtube-link').href = 'https://youtube.com/c/твой-канал';
             document.getElementById('github-link').href = 'https://github.com/kirillDev342/neyrolauncher-site';
+
+            // Инициализация UI
+            updateAuthUI();
+
+            // Закрытие модалки по клику вне её
+            document.getElementById('auth-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAuthModal();
+                }
+            });
         })();
     </script>
 </body>
